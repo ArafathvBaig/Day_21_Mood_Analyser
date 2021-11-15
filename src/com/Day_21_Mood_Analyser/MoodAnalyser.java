@@ -11,26 +11,34 @@ public class MoodAnalyser
 	{
 		this.message = message;
 	}
-	public String analyseMood()
+	public String analyseMood() throws MoodAnalysisException
 	{
 		try
 		{			
 			if(message.length() == 0)
 			{
-				throw new NullPointerException();
+				throw new MoodAnalysisException("Message can't be Empty");
 			}
 			else if(message.contains("Sad"))
 			{
 				return "SAD";
+			}
+			else if(message == null)
+			{
+				throw new MoodAnalysisException("Message can't be Null");
 			}
 			else
 			{
 				return "HAPPY";
 			}
 		}
-		catch(NullPointerException e)
+		catch(NullPointerException npe)
 		{
-			return "HAPPY";
+			throw new MoodAnalysisException("Message can't be Null");
 		}	
+		catch(Exception e)
+		{
+			throw new MoodAnalysisException("Message can't be Empty");
+		}
 	}
 }

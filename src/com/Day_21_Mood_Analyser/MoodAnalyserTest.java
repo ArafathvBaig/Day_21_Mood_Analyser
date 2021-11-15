@@ -6,24 +6,31 @@ import org.junit.jupiter.api.Test;
 class MoodAnalyserTest {
 
 	@Test
-	void testTheMessageAndReturnTheMood() 
+	void testTheMessageAndReturnTheMoodNullCase() 
 	{
-		MoodAnalyser ms = new MoodAnalyser("I am in Sad Mood");
-		String mood = ms.analyseMood();
-		Assert.assertEquals("SAD",mood);		
+		try
+		{
+			MoodAnalyser ms = new MoodAnalyser(null);
+			ms.analyseMood();
+		}
+		catch(MoodAnalysisException mae)
+		{
+			Assert.assertEquals("NULL_MESSAGE: Message can't be Null",mae.getMessage());
+		}
+		
 	}
 	@Test
-	void testTheMessageAndReturnTheMood1() 
+	void testTheMessageAndReturnTheMoodEmptyCase() 
 	{
-		MoodAnalyser ms = new MoodAnalyser("I am in Any Mood");
-		String mood = ms.analyseMood();
-		Assert.assertEquals("HAPPY",mood);		
-	}
-	@Test
-	void testTheMessageAndReturnTheMood2() 
-	{
-		MoodAnalyser ms = new MoodAnalyser("");
-		String mood = ms.analyseMood();
-		Assert.assertEquals("HAPPY",mood);		
+		try
+		{
+			MoodAnalyser ms = new MoodAnalyser("");
+			ms.analyseMood();
+		}
+		catch(MoodAnalysisException mae)
+		{
+			Assert.assertEquals("EMPTY_MESSAGE: Message can't be Empty",mae.getMessage());
+		}
+		
 	}
 }
