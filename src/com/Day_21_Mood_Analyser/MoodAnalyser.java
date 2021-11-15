@@ -14,20 +14,23 @@ public class MoodAnalyser
 	public String analyseMood()
 	{
 		try
-		{
-			if(message.contains("Sad"))
+		{			
+			if(message.length() == 0)
+			{
+				throw new NullPointerException();
+			}
+			else if(message.contains("Sad"))
 			{
 				return "SAD";
 			}
-			else if(message.length() == 0)
+			else
 			{
-				return "Happy";
+				return "HAPPY";
 			}
 		}
-		catch(Exception e)
+		catch(NullPointerException e)
 		{
-			System.out.println("Exception ::".toString());
-		}
-		return "SAD";		
+			return "HAPPY";
+		}	
 	}
 }
